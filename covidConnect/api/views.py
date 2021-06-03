@@ -42,3 +42,33 @@ def signup(request):
             'status': 500, 
             'error': 'User Already Exists'
         })
+
+@api_view(['POST'])
+def signin(request):
+    if (request.data):
+        myUser = request.data
+    else:
+        myUser = {}
+    
+    userQuery = {
+        'email': myUser['email']
+    }
+    user_details = get_user(userQuery)
+    if (user_details['status'] == 404):
+        return Response({
+            'status': 500,
+            'error': 'User not found!'
+        })
+    else:
+        user_details = user_details['data']
+        if validatePassword(myUser['pass'], user_details['key'], user_details['token']):
+            userId = str(user_details['_id'])
+            return Response({
+                'status': 200,
+                'data': userId
+            })
+        else:
+            return Response({
+                'status': 500,
+                'error': "Wrong User Password!"
+            })

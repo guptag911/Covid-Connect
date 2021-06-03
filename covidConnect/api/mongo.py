@@ -10,7 +10,9 @@ users = db.users
 #     return json.loads(json_util.dumps(data))
 
 def get_user(query):
+    # print(query);
     user = users.find_one(query)
+    # print(user);
     if user == None:
         return {
             'status': 404
