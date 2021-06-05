@@ -6,9 +6,6 @@ client = MongoClient('mongodb+srv://dbUser:Abhay.220@cluster0.nhmuu.mongodb.net/
 db = client.get_database('hackcovid')
 users = db.users
 
-# def parse_json(data):
-#     return json.loads(json_util.dumps(data))
-
 def get_user(query):
     # print(query);
     user = users.find_one(query)

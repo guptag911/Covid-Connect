@@ -1,11 +1,9 @@
 <template>
-	<div>
-		<section class="hero is-small is-info">
-			<div class="hero-body">
-				<p class="title">Covid Connect</p>
-			</div>
-		</section>
+	<div v-if="noUser">
+		
+		<nav-bar />
 
+		<!-- This is Signup Component -->
 		<div class="box" v-if="!loginView">
 			<div
 				class="notification"
@@ -107,7 +105,7 @@
 
 			<div class="field">
 				<div class="control">
-					<button class="button is-link" @click="signup()">
+					<button class="button is-link" @click="signup()" v-on:keyup.enter="signup()">
 						Sign Up
 					</button>
 				</div>
@@ -124,7 +122,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="box" v-else>
+
+		<!-- This is Login Component -->
+		<div class="box" v-else v-on:keyup.enter="signin()">
 			<div
 				class="notification"
 				v-if="isError || isSuccess"
@@ -181,15 +181,26 @@
 			</div>
 		</div>
 	</div>
+	<div v-else>
+		<dashboard :id="uid" />
+	</div>
 </template>
 
 <script>
 	import axios from "axios";
+	import DashboardVue from '../components/Dashboard.vue';
+	import NavBarVue from '../components/NavBar.vue';
 
 	export default {
 		name: "Home",
+		components: {
+			'dashboard': DashboardVue,
+			'nav-bar': NavBarVue
+		},
 		data: function() {
 			return {
+				uid: '',
+				noUser: true,
 				user_data: {
 					name: "",
 					address: "",
@@ -203,6 +214,15 @@
 				isSuccess: false,
 				errorMsg: "",
 			};
+		},
+		watch: {
+			uid: function () {
+				if (this.uid === '') {
+					this.noUser = true;
+				} else {
+					this.noUser = false;
+				}
+			}
 		},
 		methods: {
 			hideNotification: function() {
@@ -255,10 +275,12 @@
 				axios.post("/api/v1/signup", this.user_data).then((resp) => {
 					if (resp && resp.data.status === 500) {
 						this.isError = true;
+						this.isSuccess = false;
 						this.errorMsg = resp.data.error;
 					} else if (resp && resp.data.status === 200) {
 						this.isSuccess = true;
-						this.errorMsg = "User Sucessfully Created!";
+						this.isError = false;
+						this.errorMsg = "User Sucessfully Created!, Now you can login.";
 						this.loginView = true;
 					}
 				});
@@ -279,8 +301,8 @@
 						this.isError = true;
 						this.errorMsg = resp.data.error;
 					} else if (resp.data.status === 200) {
-						var uid = resp.data.data;
-						window['user'] = uid;
+						this.uid = resp.data.data;
+						// this.$store.commit('setUser', uid);
 					}
 				})
 			},

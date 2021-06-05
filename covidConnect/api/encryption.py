@@ -17,10 +17,16 @@ def decrypt(token: bytes, key: bytes) -> bytes:
 def getKeyToken(message):
     key = Fernet.generate_key()
     token = encrypt(message.encode(), key)
+    
     return {key, token}
 
 def validatePassword(message, key, token):
-    password = decrypt(token, key).decode()
+    try:
+        password = decrypt(token, key).decode()
+    except Exception as e:
+        password = '###'
+        print(e)
+
     if password == message:
         return True
     else:
