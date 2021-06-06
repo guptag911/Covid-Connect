@@ -1,3 +1,4 @@
+import pymongo
 from pymongo import MongoClient
 from bson import ObjectId
 import json
@@ -6,6 +7,8 @@ client = MongoClient('mongodb+srv://dbUser:Abhay.220@cluster0.nhmuu.mongodb.net/
 
 db = client.get_database('hackcovid')
 posts = db.posts
+
+LIMIT = 10 # Posts to show per page
 
 def addPost(post):
     post['createdAt'] = datetime.datetime.utcnow()
@@ -22,3 +25,10 @@ def addPost(post):
             'status': 500,
             'error': "Server Error"
         }
+
+def getPostwithPage(pageNo):
+    allPosts = posts.find().sort('createdAt', pymongo.DESCENDING).skip(LIMIT*(pageNo - 1)).limit(LIMIT)
+    return {
+        'count': allPosts.count(),
+        'data': allPosts
+    }

@@ -63,10 +63,8 @@ export default{
     mounted: function () {
         axios.get('https://www.mohfw.gov.in/data/datanew.json').then((resp) => {
             var stats = resp.data;
-            console.log(stats)
             var l = stats.length - 1;
             var indiaStats = stats[l];
-            console.log(indiaStats);
             this.active = indiaStats.new_active;
             this.deaths = indiaStats.new_death;
             this.cured = indiaStats.new_cured;

@@ -25,7 +25,7 @@ def validatePassword(message, key, token):
         password = decrypt(token, key).decode()
     except Exception as e:
         password = '###'
-        print(e)
+
 
     if password == message:
         return True

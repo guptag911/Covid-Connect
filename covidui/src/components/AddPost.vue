@@ -42,11 +42,13 @@
 import { VueEditor } from "vue2-editor";
 import Multiselect from 'vue-multiselect'
 import axios from 'axios';
+import {bus} from '../main'
 
 export default {
-    name: 'FeedsComponent',
+    name: 'AddPostComponent',
     props: {
-        id: String
+        id: String,
+        helpTags: Array
     },
     data: function () {
         return {
@@ -56,35 +58,6 @@ export default {
                 tag: null
             },
             isNewPost: false,
-            helpTags: [
-                {
-                    id: 0,
-                    label: "Need Blood",
-                    desc: "This category covers all the blood related requests, like you need blood. Please do spectify the blood group in title."
-                },
-                {
-                    id: 1,
-                    label: "Pet Service",
-                    desc: "This category covers pet related help, like pet care, pet medical services, etc."
-                },
-                {
-                    id: 2,
-                    label: "Food Service",
-                    desc: "This category covers food related help needed, like free food at doorstep, etc."
-
-                },
-                {
-                    id: 3,
-                    label: "Medical Help",
-                    desc: "This category covers any medical help that you may need, like updating medicine stocks, etc."
-
-                },
-                {
-                    id: 10,
-                    label: "Others",
-                    desc: "This category covers all the other kind of help that you want. Please desribe clearly the help you need."
-                }
-            ],
             isError: false,
             errorMsg: "",
             isSuccess: false
@@ -122,7 +95,11 @@ export default {
                     setInterval(this.hideNotification, 2000);
                     this.isSuccess = true;
                     this.errorMsg = "Post Succesfully Created";
-                    this.isNewPost = false;   
+                    this.isNewPost = false;
+                    this.postInput.title = "",
+                    this.postInput.tag = null;
+                    this.postInput.desc = "";
+                    bus.$emit('NEW_POST_ADDED');
                 }
             })
         },
@@ -142,11 +119,6 @@ export default {
 
     .createbtn {
         width: 100%;
-    }
-    .feedMain {
-        margin: 1%;
-        margin-left: 0px;
-        padding-top: 0.5px;
     }
 
     .box {

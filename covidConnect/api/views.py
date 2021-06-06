@@ -5,7 +5,7 @@ from django.http import JsonResponse, Http404, HttpResponse
 from .encryption import getKeyToken, validatePassword
 
 from .usersMongo  import get_user, insert_user
-from .postMongo import addPost
+from .postMongo import addPost, getPostwithPage
 
 from bson import ObjectId, json_util
 import json
@@ -99,8 +99,29 @@ def user(request):
         }
         return Response(result)
 
+@api_view(['GET'])
+def myUser(request, id):
+    userQuery = {
+        '_id': ObjectId(id)
+    }
+    userDetails = get_user(userQuery)
+
+    if (userDetails['status'] == 404):
+        return Response({
+            'status': 404,
+            'error': "User Not Found"
+        })
+    else:
+        del userDetails['data']['key']
+        del userDetails['data']['token']
+        
+        return Response({
+            'status': 200,
+            'data': parse_json(userDetails)
+        })
+
 @api_view(['POST'])
-def post(request):
+def addpost(request):
     data = request.data
 
     if 'user' not in data:
@@ -112,3 +133,14 @@ def post(request):
     newPostId = addPost(data)
 
     return Response(parse_json(newPostId))
+
+@api_view(['GET'])
+def post(request, page):
+    if page <= 0:
+        return Response({
+            'status': 404,
+            'error': "Does Not exist"
+        })
+    else:
+        posts = getPostwithPage(page)
+        return Response(parse_json(posts))
