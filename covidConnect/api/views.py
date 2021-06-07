@@ -4,14 +4,36 @@ from rest_framework.response import Response
 from django.http import JsonResponse, Http404, HttpResponse
 from .encryption import getKeyToken, validatePassword
 
-from .usersMongo  import get_user, insert_user
+from .usersMongo  import getUsersByArea, get_user, insert_user
 from .postMongo import addPost, getPostwithPage
 
 from bson import ObjectId, json_util
 import json
 
+DEAULT_FILTER = [{}]
+
 def parse_json(data):
     return json.loads(json_util.dumps(data))
+
+def filterHandler(allFilter):
+    query = {}
+    for filter in allFilter:
+        if filter['type'] == 'area' :
+            users = getUsersByArea(filter['zip'])
+            if users['status'] == 404:
+                user = []
+            else:
+                user = [u['_id'] for u in users['data']]
+            query = {
+                'user': {
+                    '$in': user
+                }
+            }
+        if filter['type'] == 'category' :
+            query = {
+                'tag': int(filter['tag'])
+            }
+    return query
 
 @api_view(['POST'])
 def signup(request):
@@ -135,12 +157,17 @@ def addpost(request):
     return Response(parse_json(newPostId))
 
 @api_view(['GET'])
-def post(request, page):
+def post(request, page, filter):
     if page <= 0:
         return Response({
             'status': 404,
             'error': "Does Not exist"
         })
     else:
-        posts = getPostwithPage(page)
+        query = {}
+        filter = json.loads(filter)
+        if filter != DEAULT_FILTER:
+            query = filterHandler(filter)
+        posts = getPostwithPage(query , page)
         return Response(parse_json(posts))
+

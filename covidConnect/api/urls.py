@@ -12,5 +12,5 @@ urlpatterns = [
 
     #Posts URLS
     path('posts', addpost),
-    path('posts/<int:page>', post)
+    path('posts/<int:page>/<str:filter>', post)
 ]

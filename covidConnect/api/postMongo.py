@@ -3,6 +3,8 @@ from pymongo import MongoClient
 from bson import ObjectId
 import json
 import datetime
+from .usersMongo import getUsersByArea
+
 client = MongoClient('mongodb+srv://dbUser:Abhay.220@cluster0.nhmuu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
 db = client.get_database('hackcovid')
@@ -26,8 +28,8 @@ def addPost(post):
             'error': "Server Error"
         }
 
-def getPostwithPage(pageNo):
-    allPosts = posts.find().sort('createdAt', pymongo.DESCENDING).skip(LIMIT*(pageNo - 1)).limit(LIMIT)
+def getPostwithPage(query, pageNo):
+    allPosts = posts.find(query).sort('createdAt', pymongo.DESCENDING).skip(LIMIT*(pageNo - 1)).limit(LIMIT)
     return {
         'count': allPosts.count(),
         'data': allPosts

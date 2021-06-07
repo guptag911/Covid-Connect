@@ -6,13 +6,18 @@
             </figure>
         </div>
         <h3 class="head">Welcome {{myUser.name }}</h3>
-        <button class="button is-info" style="width: 100%; margin:1px">Your Posts</button>
-        <!-- <hr>
-        <p> Name: {{myUser.name}} </p>
-        <p> Mobile: {{myUser.number}} </p>
-        <p> E-mail: {{myUser.email}} </p>
-        <p> ZipCode: {{myUser.zip}} </p>
-        <p> Address: {{myUser.address}} </p> -->
+        <div style="margin: 5px">
+            <div style="text-align: center; margin: 3px">
+                <span class="subtitle">Chosen Area: {{myUser.zip}}</span>
+                <a v-if="!edit" @click="toggleEdit()"><i class="fas fa-edit"></i></a>
+            </div>
+            <div v-if="edit" class="edit">
+                <input class="input" type="text" v-model="area" placeholder="Enter ZipCode of your area">
+                <a @click="save()"><i class="fas fa-check"></i></a>
+                <a @click="toggleEdit()"><i class="fas fa-times"></i></a>
+            </div>
+            <button class="button is-info" style="width: 100%; margin:3px">Edit Profile</button>
+        </div>
     </div>
 </template>
 
@@ -25,7 +30,17 @@ export default {
     },
     data: function () {
         return {
-            myUser: {}
+            myUser: {},
+            edit: false,
+            area: ""
+        }
+    },
+    methods: {
+        toggleEdit: function () {
+            this.edit = !this.edit;
+        },
+        save: function () {
+
         }
     },
     mounted: function () {
@@ -36,6 +51,7 @@ export default {
                 this.myUser = {}
             } else {
                 this.myUser = resp.data.data.data;
+                this.area = this.myUser.zip;
             }
         })
     }
@@ -58,9 +74,22 @@ export default {
     font-weight: bolder;
 }
 
+.subtitle {
+    text-align: center;
+}
+
+i {
+    margin: 8px;
+}
 
 figure {
     border: 1px solid;
     border-radius: 65px;
+}
+
+.edit {
+    text-align: center;
+    margin: 3px;
+    display: flex;
 }
 </style>

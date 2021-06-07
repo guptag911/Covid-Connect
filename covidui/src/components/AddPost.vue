@@ -130,4 +130,10 @@ export default {
     .help {
         color: gray;
     }
+
+    .ql-editing {
+        position: relative !important;
+        top: 0px !important;
+        left: 0px !important;
+    }
 </style>

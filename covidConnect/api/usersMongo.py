@@ -7,9 +7,7 @@ db = client.get_database('hackcovid')
 users = db.users
 
 def get_user(query):
-    # print(query);
     user = users.find_one(query)
-    # print(user);
     if user == None:
         return {
             'status': 404
@@ -32,4 +30,20 @@ def insert_user(query):
         return {
             'status': 500,
             'error': e
+        }
+
+def getUsersByArea(zip):
+    query = {
+        'zip': zip,
+    }
+    user = users.find(query)
+    if (user == None):
+        return {
+            'status': 404,
+            'error': "No user's found"
+        }
+    else:
+        return {
+            'status': 200,
+            'data': user 
         }

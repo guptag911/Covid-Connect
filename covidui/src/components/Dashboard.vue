@@ -12,7 +12,7 @@
             </div>
             <div class="column feedMain">
                 <add-post :id="id" :helpTags="helpTags" />
-                <feeds-component :helpTags="helpTags" />
+                <feeds-component :helpTags="helpTags" :user="user"/>
             </div>
         </div>
     </div>
@@ -24,6 +24,7 @@ import UserDetailsComponent from '../components/UserDetails.vue'
 import CovidStatusVue from './CovidStatus.vue';
 import AddPost from './AddPost.vue';
 import FeedVue from './Feed.vue';
+import axios from 'axios';
 
 export default {
   name: 'Dashboard',
@@ -68,10 +69,15 @@ export default {
                     desc: "This category covers all the other kind of help that you want. Please desribe clearly the help you need."
                 }
             ],
+            user: {}
       }
   },
-  computed: {
-  
+  mounted: function () { 
+    axios.get('/api/v1/user/' + this.id).then( (resp)=> {
+        if (resp.status == 200) {
+            this.user = resp.data.data.data;
+        }
+    })
   }
 }
 </script>
