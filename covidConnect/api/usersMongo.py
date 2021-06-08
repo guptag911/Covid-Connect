@@ -47,3 +47,23 @@ def getUsersByArea(zip):
             'status': 200,
             'data': user 
         }
+
+def updateUser(id, fields):
+    userQuery = {
+        '_id': ObjectId(id)
+    }
+    user = get_user(userQuery)
+    if (user['status'] == 404):
+        return {
+            'status': 404,
+            'error': "user does not exist"
+        }
+    else:
+        newFields = {
+            "$set": fields
+        }
+        users.update_one(userQuery, newFields)
+        return {
+            'status': 200
+        }
+

@@ -10,9 +10,12 @@
                     <covid-stats />
                 </div>
             </div>
-            <div class="column feedMain">
+            <div v-if="!editMode" class="column feedMain">
                 <add-post :id="id" :helpTags="helpTags" />
                 <feeds-component :helpTags="helpTags" :user="user"/>
+            </div>
+            <div v-else class="column feedMain">
+                <edit-profile />
             </div>
         </div>
     </div>
@@ -25,6 +28,8 @@ import CovidStatusVue from './CovidStatus.vue';
 import AddPost from './AddPost.vue';
 import FeedVue from './Feed.vue';
 import axios from 'axios';
+import { bus } from '../main';
+import EditProfileVue from './EditProfile.vue';
 
 export default {
   name: 'Dashboard',
@@ -33,7 +38,8 @@ export default {
       'user-details': UserDetailsComponent,
       'covid-stats': CovidStatusVue,
       'add-post': AddPost,
-      'feeds-component': FeedVue
+      'feeds-component': FeedVue,
+      'edit-profile': EditProfileVue
   },
   props: {
       id: String
@@ -69,14 +75,20 @@ export default {
                     desc: "This category covers all the other kind of help that you want. Please desribe clearly the help you need."
                 }
             ],
-            user: {}
+            user: {},
+            editMode: false
       }
   },
   mounted: function () { 
+      var vm = this;
     axios.get('/api/v1/user/' + this.id).then( (resp)=> {
         if (resp.status == 200) {
             this.user = resp.data.data.data;
         }
+    })
+    bus.$on('PROFILE_EDIT', function () {
+        console.log("I listened");
+        vm.editMode = true;
     })
   }
 }
@@ -88,8 +100,15 @@ export default {
     margin: 1%;
 }
 
+
 .users {
-    max-width: 30%;
+    max-width: 30%;   
+}
+
+@media screen and (max-width: 950px) {
+    .users {
+        max-width: 100%;
+    }    
 }
 
 .feedMain {

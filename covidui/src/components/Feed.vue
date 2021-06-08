@@ -121,6 +121,12 @@ export default {
                 vm.getPosts();
             }
         })
+        bus.$on('AREA_CHANGE', function (area) {
+            vm.user.zip = area;
+            if (vm.currTab == 'area-tab') {
+                vm.pageNo = 1;
+            }
+        })
     }
 }
 </script>

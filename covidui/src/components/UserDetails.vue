@@ -16,13 +16,14 @@
                 <a @click="save()"><i class="fas fa-check"></i></a>
                 <a @click="toggleEdit()"><i class="fas fa-times"></i></a>
             </div>
-            <button class="button is-info" style="width: 100%; margin:3px">Edit Profile</button>
+            <a :href='editProfileUrl'><button class="button is-info" style="width: 100%; margin:3px">Edit Profile</button></a>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { bus } from '../main';
 export default {
     name: 'UserDetailsComponent',
     props: {
@@ -32,7 +33,8 @@ export default {
         return {
             myUser: {},
             edit: false,
-            area: ""
+            area: "",
+            editProfileUrl: '/edit?id='
         }
     },
     methods: {
@@ -40,7 +42,23 @@ export default {
             this.edit = !this.edit;
         },
         save: function () {
-
+            var vm = this;
+            var payload = {
+                'id': vm.id,
+                'fields': {
+                    'zip': this.area
+                }
+            }
+            axios.post('/api/v1/update/user', payload).then((resp) => {
+                if (resp.data && resp.data.status == 200) {
+                    this.toggleEdit();
+                    this.myUser.zip = this.area
+                    bus.$emit('AREA_CHANGE', this.area);
+                }
+            })
+        },
+        profileEdit: function () {
+            bus.$emit('PROFILE_EDIT')
         }
     },
     mounted: function () {
@@ -52,6 +70,7 @@ export default {
             } else {
                 this.myUser = resp.data.data.data;
                 this.area = this.myUser.zip;
+                this.editProfileUrl +=this.id;
             }
         })
     }

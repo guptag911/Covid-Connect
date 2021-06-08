@@ -4,7 +4,7 @@
             <span class="is-size-7">{{ date }}</span>
             <article class="media">
                 <div class="media-content">
-                    <div class="content">
+                    <div class="content" style="overflow: auto;">
                     <p>
                         <strong class="title">{{ post.title }}</strong>
                         <br>

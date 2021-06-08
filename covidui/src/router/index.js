@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Dashboard from '../components/Dashboard.vue'
+import EditProfile from '../components/EditProfile.vue'
 
 Vue.use(VueRouter)
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/edit',
+    name: 'EditProfile',
+    component: EditProfile,
   },
   {
     path: '/about',

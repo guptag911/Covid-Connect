@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse, Http404, HttpResponse
 from .encryption import getKeyToken, validatePassword
 
-from .usersMongo  import getUsersByArea, get_user, insert_user
+from .usersMongo  import getUsersByArea, get_user, insert_user, updateUser
 from .postMongo import addPost, getPostwithPage
 
 from bson import ObjectId, json_util
@@ -96,6 +96,28 @@ def signin(request):
                 'status': 500,
                 'error': "Wrong User Password!"
             })
+
+@api_view(['POST'])
+def UpdateUser(request):
+    uid = ''
+    fields = {}
+    payload = request.data
+    if 'id' in payload:
+        uid = payload['id']
+        if 'fields' in payload:
+            fields = payload['fields']
+        else:
+            return Response({
+                'status': 200,
+                'data': 'No fields to update'
+            })
+        newUser = updateUser(uid, fields)
+        return Response(parse_json(newUser));
+    else:
+        return Response({
+            'status': 500,
+            'error': 'No Id Found!'
+        })
 
 @api_view(['POST'])
 def user(request):
