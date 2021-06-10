@@ -165,7 +165,7 @@
 
 			<div class="field">
 				<div class="control">
-					<button class="button is-link" @click="signin()">Sign In</button>
+					<button class="button is-link" :class="isLoading ? 'is-loading' : ''" @click="signin()">Sign In</button>
 				</div>
 			</div>
 
@@ -181,20 +181,16 @@
 			</div>
 		</div>
 	</div>
-	<div v-else>
-		<dashboard :id="uid" />
-	</div>
 </template>
 
 <script>
 	import axios from "axios";
-	import DashboardVue from '../components/Dashboard.vue';
 	import NavBarVue from '../components/NavBar.vue';
+	import { getCookie, setCookie } from '../main';
 
 	export default {
 		name: "Home",
 		components: {
-			'dashboard': DashboardVue,
 			'nav-bar': NavBarVue
 		},
 		data: function() {
@@ -213,6 +209,7 @@
 				isError: false,
 				isSuccess: false,
 				errorMsg: "",
+				isLoading: false
 			};
 		},
 		watch: {
@@ -286,6 +283,7 @@
 				});
 			},
 			signin: function() {
+				this.isLoading = true;
 				if (this.user_data.pass.length === 0) {
 					this.isError = true;
 					this.errorMsg = "Password field cannot be empty."
@@ -302,11 +300,20 @@
 						this.errorMsg = resp.data.error;
 					} else if (resp.data.status === 200) {
 						this.uid = resp.data.data;
-						// this.$store.commit('setUser', uid);
+						setCookie("uid", this.uid, 30);
+						this.isLoading = false;
+						window.location = '/dashboard';
 					}
 				})
 			},
 		},
+		mounted: function () {
+			var userId = getCookie("uid");
+			if (userId !== ""){
+				this.uid = userId;
+				window.location = '/dashboard';
+			}
+		}
 	};
 </script>
 

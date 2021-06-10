@@ -16,14 +16,15 @@
                 <a @click="save()"><i class="fas fa-check"></i></a>
                 <a @click="toggleEdit()"><i class="fas fa-times"></i></a>
             </div>
-            <a :href='editProfileUrl'><button class="button is-info" style="width: 100%; margin:3px">Edit Profile</button></a>
+            <a :href='editProfileUrl'><button class="button is-info" style="width: 100%; margin:3px">View Profile</button></a>
+            <button class="button is-danger" style="width: 100%; margin:3px" @click="logout()">Logout!</button>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-import { bus } from '../main';
+import { bus, setCookie } from '../main';
 export default {
     name: 'UserDetailsComponent',
     props: {
@@ -34,7 +35,7 @@ export default {
             myUser: {},
             edit: false,
             area: "",
-            editProfileUrl: '/edit?id='
+            editProfileUrl: '/profile?id='
         }
     },
     methods: {
@@ -59,6 +60,10 @@ export default {
         },
         profileEdit: function () {
             bus.$emit('PROFILE_EDIT')
+        },
+        logout: function () {
+            setCookie("uid", '', 0);
+            bus.$emit('LOGOUT');
         }
     },
     mounted: function () {

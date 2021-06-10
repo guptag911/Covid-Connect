@@ -5,7 +5,7 @@ from django.http import JsonResponse, Http404, HttpResponse
 from .encryption import getKeyToken, validatePassword
 
 from .usersMongo  import getUsersByArea, get_user, insert_user, updateUser
-from .postMongo import addPost, getPostwithPage
+from .postMongo import addPost, delPost, getPostwithPage, delPost
 
 from bson import ObjectId, json_util
 import json
@@ -18,7 +18,7 @@ def parse_json(data):
 def filterHandler(allFilter):
     query = {}
     for filter in allFilter:
-        if filter['type'] == 'area' :
+        if 'type' in filter and  filter['type'] == 'area' :
             users = getUsersByArea(filter['zip'])
             if users['status'] == 404:
                 user = []
@@ -29,9 +29,13 @@ def filterHandler(allFilter):
                     '$in': user
                 }
             }
-        if filter['type'] == 'category' :
+        if 'type' in filter and  filter['type'] == 'category' :
             query = {
                 'tag': int(filter['tag'])
+            }
+        if 'type' in filter and filter['type'] == 'mine' :
+            query = {
+                'user': ObjectId(filter['id'])
             }
     return query
 
@@ -193,3 +197,8 @@ def post(request, page, filter):
         posts = getPostwithPage(query , page)
         return Response(parse_json(posts))
 
+@api_view(['POST'])
+def deletePost(request):
+    data = request.data
+    postId = data['id']
+    return Response(delPost(postId))

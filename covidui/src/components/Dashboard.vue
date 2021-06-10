@@ -28,7 +28,7 @@ import CovidStatusVue from './CovidStatus.vue';
 import AddPost from './AddPost.vue';
 import FeedVue from './Feed.vue';
 import axios from 'axios';
-import { bus } from '../main';
+import { bus, getCookie } from '../main';
 import EditProfileVue from './EditProfile.vue';
 
 export default {
@@ -40,9 +40,6 @@ export default {
       'add-post': AddPost,
       'feeds-component': FeedVue,
       'edit-profile': EditProfileVue
-  },
-  props: {
-      id: String
   },
   data: function () {
       return {
@@ -79,6 +76,16 @@ export default {
             editMode: false
       }
   },
+  computed: {
+      id: function () {
+          return getCookie('uid')
+      }
+  },
+  created: function () {
+      if (!this.id || this.id == '') {
+          window.location = '/';
+      }
+  },
   mounted: function () { 
       var vm = this;
     axios.get('/api/v1/user/' + this.id).then( (resp)=> {
@@ -87,8 +94,10 @@ export default {
         }
     })
     bus.$on('PROFILE_EDIT', function () {
-        console.log("I listened");
         vm.editMode = true;
+    })
+    bus.$on('LOGOUT', function () {
+        window.location = '/';
     })
   }
 }

@@ -1,7 +1,5 @@
 <template>
     <div>
-        <nav-bar />
-        <h1 class="content title">Edit Profile</h1>
         <div class="box">
                 <div
                     class="notification"
@@ -94,30 +92,15 @@
                         </button>
                     </div>
                 </div>
-
-                <div class="field">
-                    <div class="control">
-                        <button
-                            class="button is-link is-light"
-                            @click="cancel()"
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </div>
             </div>
     </div>
 </template>
 
 <script>
-import NavBarVue from './NavBar.vue'
 import axios from 'axios'
 
 export default {
     name: "EditProfileComponent",
-    components: {
-        'nav-bar': NavBarVue
-    },
     computed: {
         'uid': function () {
             return this.$route.query.id || ''
@@ -156,9 +139,6 @@ export default {
             
             return false;
 		},
-        cancel: function () {
-            window.location = '/dashboard'
-        },
         save: function () {
             var vm = this;
             if (this.performValidations()) {
@@ -198,14 +178,15 @@ export default {
 
 <style scoped>
 .box {
-		width: 60%;
-		margin: auto;
-		text-align: left;
-		margin-top: 2%;
-		margin-bottom: 5%;
-	}
+    margin: 2%;
+    text-align: left;
+}
 
 button {
     width: 100%;
+}
+
+title {
+    padding: 1%;
 }
 </style>

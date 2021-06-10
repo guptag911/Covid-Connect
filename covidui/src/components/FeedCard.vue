@@ -2,6 +2,12 @@
     <div class="headCard"> 
         <div class="box postCard">
             <span class="is-size-7">{{ date }}</span>
+            <span v-if="isAdmin" @click="toggleDeleteBox()"><i class="fas fa-trash-alt"></i></span>
+            <div v-if="showDelBox" class="box confirmation">
+                <p>Are you sure, you want to delete this post? </p>
+                <button class="button is-danger" @click="deletePost()">Yes</button>
+                <button class="button is-success is-light" @click="toggleDeleteBox()">No</button>
+            </div>
             <article class="media">
                 <div class="media-content">
                     <div class="content" style="overflow: auto;">
@@ -23,18 +29,23 @@
                     <h5>Mobile: {{ postCreater.number }}</h5>
             </div>
         </div>
-        <button v-if="!showDetails" class="button is-dark is-fullwidth is-fullwidth" :class="isLoading ? 'is-loading' : ''" @click="togglePostCreate()">Contact for Help</button>
+        <button v-if="!showDetails && !isAdmin" class="button is-dark is-fullwidth is-fullwidth" :class="isLoading ? 'is-loading' : ''" @click="togglePostCreate()">Contact for Help</button>
         <button v-if="showDetails" class="button is-dark is-fullwidth is-fullwidth" :class="isLoading ? 'is-loading' : ''" @click="togglePostCreate ()">Hide Details!</button>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { bus } from '../main';
 export default {
     name: 'FeedCardComponent',
     props: {
         post: Object,
-        tags: Array
+        tags: Array,
+        isAdmin: {
+            default: false,
+            type: Boolean
+        }
     },
     data: function () {
         return {
@@ -42,7 +53,8 @@ export default {
             postTag: "",
             date: "",
             postCreater: null,
-            showDetails: false
+            showDetails: false,
+            showDelBox: false
         }
     },
     methods: {
@@ -84,6 +96,21 @@ export default {
                     this.postCreater = null;
                 }
             })
+        },
+        toggleDeleteBox: function () {
+            this.showDelBox = !this.showDelBox;
+        },
+        deletePost: function () {
+            var id = this.post && this.post._id && this.post._id.$oid;
+            var payload = {
+                'id' : id
+            }
+            axios.post('/api/v1/delete/post', payload).then((resp) => {
+                if (resp.data.status == 200) {
+                    this.toggleDeleteBox();
+                    bus.$emit('POST_DELETED');
+                }
+            })
         }
     },
     mounted: function () {
@@ -107,5 +134,26 @@ export default {
 
 .details {
     margin: 2px;
+}
+
+i {
+    right: 2%;
+    position: absolute;
+}
+
+.confirmation {
+    width: 60%;
+    padding: 3%;
+    margin: 0px;
+    right: -20%;
+    position: absolute;
+    background: whitesmoke;
+    text-align: center;
+    font-weight: bold;
+}
+
+.confirmation button {
+    width: 40%;
+    margin: 3px;
 }
 </style>

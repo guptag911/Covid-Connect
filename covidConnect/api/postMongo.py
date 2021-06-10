@@ -29,8 +29,26 @@ def addPost(post):
         }
 
 def getPostwithPage(query, pageNo):
+    query['deleted'] = {
+        '$ne': True
+    }
     allPosts = posts.find(query).sort('createdAt', pymongo.DESCENDING).skip(LIMIT*(pageNo - 1)).limit(LIMIT)
     return {
         'count': allPosts.count(),
         'data': allPosts
+    }
+
+def delPost(id):
+    field = {
+        '$set': {
+            'deleted': True
+        }
+    }
+
+    query = {
+        '_id': ObjectId(id)
+    }
+    posts.update_one(query, field)
+    return {
+        'status': 200
     }

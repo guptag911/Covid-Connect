@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import myUser, signin, signup, user, addpost, post, UpdateUser
+from .views import deletePost, myUser, signin, signup, user, addpost, post, UpdateUser
 
 urlpatterns = [
     #Authentication URLS
@@ -13,5 +13,6 @@ urlpatterns = [
 
     #Posts URLS
     path('posts', addpost),
-    path('posts/<int:page>/<str:filter>', post)
+    path('posts/<int:page>/<str:filter>', post),
+    path('delete/post', deletePost)
 ]
