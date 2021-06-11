@@ -1,6 +1,5 @@
 <template>
     <div>
-        <nav-bar />
         <div class="columns">
             <div class="column users">
                 <div class="user"> 
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-import NavBarVue from '../components/NavBar.vue';
 import UserDetailsComponent from '../components/UserDetails.vue'
 import CovidStatusVue from './CovidStatus.vue';
 import AddPost from './AddPost.vue';
@@ -34,7 +32,6 @@ import EditProfileVue from './EditProfile.vue';
 export default {
   name: 'Dashboard',
   components: {
-      'nav-bar': NavBarVue,
       'user-details': UserDetailsComponent,
       'covid-stats': CovidStatusVue,
       'add-post': AddPost,

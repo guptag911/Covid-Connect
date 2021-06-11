@@ -10,11 +10,11 @@
             </div>
             <article class="media">
                 <div class="media-content">
-                    <div class="content" style="overflow: auto;">
+                    <div class="content">
                     <p>
                         <strong class="title">{{ post.title }}</strong>
                         <br>
-                        <span v-html="post.desc"></span>
+                        <span style="overflow: auto" v-html="post.desc"></span>
                     </p>
                     </div>
                 </div>

@@ -1,12 +1,24 @@
 <template>
   <div id="app">
+    <nav-bar />
     <router-view/>
   </div>
 </template>
 
+<script>
+import NavBarVue from './components/NavBar.vue'
+export default {
+  name: 'App',
+  components: {
+    'nav-bar': NavBarVue
+  }
+}
+</script>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

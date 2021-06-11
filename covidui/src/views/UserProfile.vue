@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<nav-bar />
 		<div class="main">
 			<router-link to="/dashboard">
 				<button
@@ -102,13 +101,11 @@
 <script>
 	import axios from "axios";
 	import EditProfile from "../components/EditProfile.vue";
-	import NavBar from "../components/NavBar.vue";
 	import FeedCardVue from "../components/FeedCard.vue";
 	import { bus } from "../main";
 	export default {
 		components: {
 			"edit-profile": EditProfile,
-			"nav-bar": NavBar,
 			"feed-card": FeedCardVue,
 		},
 		name: "UserProfile",

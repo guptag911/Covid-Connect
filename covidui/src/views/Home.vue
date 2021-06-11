@@ -1,8 +1,5 @@
 <template>
 	<div v-if="noUser">
-		
-		<nav-bar />
-
 		<!-- This is Signup Component -->
 		<div class="box" v-if="!loginView">
 			<div
@@ -185,14 +182,10 @@
 
 <script>
 	import axios from "axios";
-	import NavBarVue from '../components/NavBar.vue';
 	import { getCookie, setCookie } from '../main';
 
 	export default {
 		name: "Home",
-		components: {
-			'nav-bar': NavBarVue
-		},
 		data: function() {
 			return {
 				uid: '',

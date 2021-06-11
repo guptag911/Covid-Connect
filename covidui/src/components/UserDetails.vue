@@ -5,7 +5,7 @@
                 <img class="is-rounded" src="https://img.icons8.com/clouds/2x/user-male.png">
             </figure>
         </div>
-        <h3 class="head">Welcome {{myUser.name }}</h3>
+        <h3 class="headWel">Welcome {{myUser.name }}</h3>
         <div style="margin: 5px">
             <div style="text-align: center; margin: 3px">
                 <span class="subtitle">Chosen Area: {{myUser.zip}}</span>
@@ -93,9 +93,10 @@ export default {
     text-align: -webkit-center;
 }
 
-.head {
+.headWel {
     text-align: center;
     font-weight: bolder;
+    font-size: 18px;
 }
 
 .subtitle {
