@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse, Http404, HttpResponse
 from .encryption import getKeyToken, validatePassword
 
+from .testimonialMongo import create, get
 from .usersMongo  import getUsersByArea, get_user, insert_user, updateUser
 from .postMongo import addPost, delPost, getPostwithPage, delPost
 
@@ -202,3 +203,20 @@ def deletePost(request):
     data = request.data
     postId = data['id']
     return Response(delPost(postId))
+
+@api_view(['POST'])
+def newTestimonial(request):
+    data = request.data
+    if 'uid' not in data or data['uid'] == '':
+        return Response({
+            'status': 500,
+            'error': "You must login to create testimonial"
+        })
+    else:
+        res = create(data)
+        return Response(parse_json(res))
+
+@api_view(['GET'])
+def getTestimonials(request):
+    myTestimonials = get({})
+    return Response(parse_json(myTestimonials));
