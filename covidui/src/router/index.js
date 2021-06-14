@@ -5,6 +5,7 @@ import Dashboard from '../components/Dashboard.vue'
 import EditProfile from '../components/EditProfile.vue'
 import UserProfile from '../views/UserProfile.vue'
 import Testimonials from '../views/Testimonials.vue'
+import Donate from '../views/Donate.vue'
 
 Vue.use(VueRouter)
 const routes = [
@@ -27,6 +28,11 @@ const routes = [
     path: '/testimonials',
     name: 'Testimonials',
     component: Testimonials
+  },
+  {
+    path: '/donate',
+    name: 'Donate',
+    component: Donate
   },
   {
     path: '/about',

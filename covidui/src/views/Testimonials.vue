@@ -109,7 +109,7 @@ export default {
                 'suggest': this.testimonial.suggest,
                 'uid': vm.uid
             }
-            axios.post('/api/v1/create/testimonial', data).then( (resp) => {
+            axios.post('/api/v1/create/testimonial', data).then( () => {
                 this.newTestimonial();
             })
         }
@@ -139,6 +139,10 @@ export default {
             this.currentT = this.allTestimonials[this.index];
             var id = this.currentT.user.$oid;
             this.currentU = this.users[id];
+            setInterval(function () {
+                console.log("called");
+                this.index = this.index + 1;
+            }, 1000);
     }
 }
 </script>
