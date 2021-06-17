@@ -87,7 +87,7 @@
 
                 <div class="field">
                     <div class="control">
-                        <button class="button is-link" @click="save()" v-on:keyup.enter="save()">
+                        <button class="button" style="background: #273d51; color: white" @click="save()" v-on:keyup.enter="save()">
                             Save
                         </button>
                     </div>

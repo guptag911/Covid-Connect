@@ -3,94 +3,86 @@
 		<div class="main">
 			<router-link to="/dashboard">
 				<button
-					class="button is-danger"
-					style="width: 100%; margin-bottom: 2%"
+					class="button is-inactive"
+					style="width: 100%; margin-bottom: 2%;"
 				>
 					Back
 				</button>
 			</router-link>
+			<div class="tabChanger">
+				<button class="button" :class="currTab == 'edit' ? 'is-active': 'is-inactive'"  @click="tabChange('edit')">
+					Profile
+				</button>
+				<button class="button" :class="currTab == 'posts' ? 'is-active': 'is-inactive'"  @click="tabChange('posts')">
+					Posts
+				</button>
+			</div>
 			<div class="box">
-				<div class="columns">
-					<div class=" column tabs is-4">
-						<button
-							class="button is-light"
-							@click="tabChange('edit')"
-						>
-							User Details
-						</button>
-						<button
-							class="button is-dark is-light"
-							@click="tabChange('posts')"
-						>
-							User Posts!
-						</button>
+				<div class="display">
+					<div v-if="currTab == 'edit'">
+						<edit-profile />
 					</div>
-					<div class="column display">
-						<div v-if="currTab == 'edit'">
-							<edit-profile />
-						</div>
-						<div v-if="currTab == 'posts'">
-							<span v-for="(post, i) in allPosts" :key="i">
-								<feed-card
-									:post="post"
-									:tags="helpTags"
-									:isAdmin="true"
-								/>
-							</span>
-							<nav
-								class="pagination is-centered"
-								role="navigation"
-								aria-label="pagination"
+					<div v-if="currTab == 'posts'">
+						<span v-for="(post, i) in allPosts" :key="i">
+							<feed-card
+								:post="post"
+								:tags="helpTags"
+								:isAdmin="true"
+							/>
+						</span>
+						<nav
+							class="pagination is-centered"
+							role="navigation"
+							aria-label="pagination"
+						>
+							<a
+								class="pagination-previous"
+								title="This is the first page"
+								:disabled="isDisabled(pageNo - 1)"
+								@click="pageChange(pageNo - 1)"
+								>Previous</a
 							>
-								<a
-									class="pagination-previous"
-									title="This is the first page"
-									:disabled="isDisabled(pageNo - 1)"
-									@click="pageChange(pageNo - 1)"
-									>Previous</a
-								>
-								<a
-									class="pagination-next"
-									:disabled="isDisabled(pageNo + 1)"
-									@click="pageChange(pageNo + 1)"
-									>Next page</a
-								>
-								<ul class="pagination-list">
-									<li>
-										<a
-											class="pagination-link is-current"
-											aria-label="Page 1"
-											aria-current="page"
-											>{{ pageNo }}</a
-										>
-									</li>
-									<li>
-										<a
-											class="pagination-link"
-											aria-label="Goto page 'pageNo + 1'"
-											:disabled="isDisabled(pageNo + 1)"
-											@click="pageChange(pageNo + 1)"
-											>{{ pageNo + 1 }}</a
-										>
-									</li>
-									<li>
-										<a
-											class="pagination-link"
-											aria-label="Goto page 'pageNo + 2'"
-											:disabled="isDisabled(pageNo + 2)"
-											@click="pageChange(pageNo + 2)"
-										>
-											{{ pageNo + 2 }}</a
-										>
-									</li>
-									<li>
-										<span class="pagination-ellipsis"
-											>&hellip;</span
-										>
-									</li>
-								</ul>
-							</nav>
-						</div>
+							<a
+								class="pagination-next"
+								:disabled="isDisabled(pageNo + 1)"
+								@click="pageChange(pageNo + 1)"
+								>Next page</a
+							>
+							<ul class="pagination-list">
+								<li>
+									<a
+										class="pagination-link is-current"
+										aria-label="Page 1"
+										aria-current="page"
+										>{{ pageNo }}</a
+									>
+								</li>
+								<li>
+									<a
+										class="pagination-link"
+										aria-label="Goto page 'pageNo + 1'"
+										:disabled="isDisabled(pageNo + 1)"
+										@click="pageChange(pageNo + 1)"
+										>{{ pageNo + 1 }}</a
+									>
+								</li>
+								<li>
+									<a
+										class="pagination-link"
+										aria-label="Goto page 'pageNo + 2'"
+										:disabled="isDisabled(pageNo + 2)"
+										@click="pageChange(pageNo + 2)"
+									>
+										{{ pageNo + 2 }}</a
+									>
+								</li>
+								<li>
+									<span class="pagination-ellipsis"
+										>&hellip;</span
+									>
+								</li>
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</div>
@@ -216,14 +208,14 @@
 
 <style scoped>
 	.main {
-		top: 20px;
+		top: 15px;
 		margin: 10%;
 		padding: 0px;
-		margin-top: 8%;
+		margin-top: 6%;
 	}
 
 	.box {
-		padding: 0px;
+		padding: 1%;
 	}
 
 	.tabs {
@@ -237,6 +229,33 @@
 		display: block;
 	}
 	.display {
-		background: whitesmoke;
+		margin-right: 1%;
+	}
+
+	.tabChanger {
+		text-align: left;
+		width: 100%;
+		margin-bottom: 0px;
+	}
+	.tabChanger button {
+		width: 25%;
+		background: #3273dc;
+		margin-right: 2px;
+		color: white;
+	}
+	.is-active {
+		background: #273d51 !important;
+		font-weight: bold;
+		transform: scale(1.1);
+	}
+	.is-inactive {
+		background: whitesmoke !important;
+		border-color: #273d51;
+		color: #273d51 !important;
+	}
+	@media screen and (max-width: 950px) {
+		.main {
+			margin: 2%;
+		}
 	}
 </style>

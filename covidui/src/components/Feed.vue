@@ -152,4 +152,10 @@ export default {
     width: 50%;
     border-radius: 0px 25px 25px 0px;
 }
+
+@media screen and (max-width: 950px) {
+    .box {
+        padding: 5px;
+    }
+}
 </style>

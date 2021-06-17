@@ -5,7 +5,7 @@
                 <div class="user"> 
                     <user-details :id='id'></user-details>
                 </div>
-                <div class="user">
+                <div class="user stats">
                     <covid-stats />
                 </div>
             </div>
@@ -114,7 +114,14 @@ export default {
 @media screen and (max-width: 950px) {
     .users {
         max-width: 100%;
-    }    
+    }
+    .stats {
+        display: none;
+    }
+    .feedMain {
+        margin: 0.5%;
+    }
+
 }
 
 .feedMain {
