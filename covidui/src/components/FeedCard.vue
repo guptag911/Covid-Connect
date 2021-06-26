@@ -24,9 +24,22 @@
             </article>
             <div v-if="showDetails" class="content">
                 <hr>
-                    <h5>Name: {{ postCreater.name }}</h5>
-                    <h5>Email: {{ postCreater.email}}</h5>
-                    <h5>Mobile: {{ postCreater.number }}</h5>
+                <div class="columns">
+                    <div class="column is-half">
+                        <h5>Name: {{ postCreater.name }}</h5>
+                    </div>
+                    <div class="column is-half">
+                        <h5>Email: {{ postCreater.email}}</h5>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-half">
+                        <h5>Mobile: {{ postCreater.number }}</h5>
+                    </div>
+                    <div class="column is-half">
+                        <h5>Area: {{ postCreater.zip }}</h5>
+                    </div>
+                </div>
             </div>
         </div>
         <button v-if="!showDetails && !isAdmin" class="button is-dark is-fullwidth is-fullwidth" :class="isLoading ? 'is-loading' : ''" @click="togglePostCreate()">Contact for Help</button>

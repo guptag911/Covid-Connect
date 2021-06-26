@@ -14,22 +14,22 @@
                       Help others without any reason and give without the expectation of receiving anything in return.
                     <p style="text-align: right">- ROY T. BENNETT </p>
                   </blockquote>
-                  <div class="columns" style="align-items: center">
+                  <div style="align-items: center; display: flex">
                       <p>Powered By</p>
-                      <div class="column" style="width: 30%">
+                      <div style="width: 30%">
                           <img class="image" src="https://pay.google.com/about/business/static/images/logos/logo-gp3.svg">
                       </div>
-                      <div class="column" style="width: 30%"> 
+                      <div style="width: 30%"> 
                           <img  class="image" src="https://cdn.iconscout.com/icon/free/png-512/paytm-226448.png">
                       </div>
-                      <div class="column" style="width: 30%">
+                      <div style="width: 30%">
                           <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/1200px-UPI-Logo-vector.svg.png">
                       </div>
                   </div>
               </div>
           </div>
           <div class="column">
-           <img class="image" src="../assets/qr.png"> 
+           <img class="image" src="../assets/PM-Cares-qr.png"> 
           </div>
       </div>
   </div>

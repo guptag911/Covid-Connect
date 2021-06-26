@@ -4,15 +4,15 @@
     <router-link class="navbar-item head"  to="/">
       Covid Connect
     </router-link>
-    <div class="navbar-burger" data-target="navbarExampleTransparentExample">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <a role="button" class="navbar-burger" :class="openMenu ? 'is-active': ''" aria-label="menu" aria-expanded="false" data-target="navbarExampleTransparentExample" @click="menu()">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
 
-  <div id="navbarExampleTransparentExample" class="navbar-menu">
-    <div class="navbar-start">
+  <div id="navbarExampleTransparentExample" class="navbar-menu" :class="openMenu ? 'is-active': ''">
+    <div class="navbar-start" @click="tabChanged()">
       <router-link class="navbar-item" to='/dashboard'>
         Home
       </router-link>
@@ -32,13 +32,22 @@
         name: 'NavBar',
         data: function () {
             return {
-              currTab: 'home'
+              currTab: 'home',
+              openMenu: false
             }
         },
         computed: {
           tab: function () {
             var currTab = (this.$route.path).replace('/', '');
             return currTab;
+          }
+        },
+        methods: {
+          menu: function () {
+            this.openMenu = !this.openMenu;
+          },
+          tabChanged: function () {
+            this.openMenu = false;
           }
         }
     }

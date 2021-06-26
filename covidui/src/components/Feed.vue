@@ -1,8 +1,8 @@
 <template>
   <div class="box">
       <div class="filter">
-          <button class="button is-info postFilterbtnF" @click="changeTab('all-tab')" :class="currTab == 'area-tab' ? 'is-light' : ''">Posts from all India</button>
-          <button class="button is-info postFilterbtnS" @click="changeTab('area-tab')" :class="currTab == 'all-tab' ? 'is-light' : ''">Posts from your area</button>
+          <button class="button is-link postFilterbtnF" @click="changeTab('all-tab')" :class="currTab == 'area-tab' ? 'is-light' : ''">Posts from all India</button>
+          <button class="button is-link postFilterbtnS" @click="changeTab('area-tab')" :class="currTab == 'all-tab' ? 'is-light' : ''">Posts from your area</button>
       </div>
       <loader-component v-if="isLoading" />
       <div v-if="allPosts.length == 0">
@@ -139,7 +139,7 @@ export default {
 .filter {
     width: 100%;
     margin: auto;
-    border: 0.5px solid #238cd1;
+    border: 0.5px solid #2160c4;
     border-radius: 25px;
 }
 

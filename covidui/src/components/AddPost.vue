@@ -8,7 +8,7 @@
             <button class="delete" @click="hideNotification()"></button>
             {{ errorMsg }}
         </div>
-        <button v-if="!isNewPost" class="button is-info createbtn is-medium" @click="toggleNewPost">Create Post</button>
+        <button v-if="!isNewPost" class="button is-info createbtn is-medium" style="background-color: #2160c4" @click="toggleNewPost">Create Post</button>
         <div v-if="isNewPost" class="box">
             <p class="title">Don't worry we are with you!</p>
             <div class="field">
@@ -31,8 +31,8 @@
                 </div>
             </div>
             <div style="text-align: center;">
-                <span class="button is-info" style="width: 48%; margin: 0.5%;" @click="onCreate()">Create</span>
-                <span class="button is-info" style="width: 48%; margin: 0.5%;" @click="toggleNewPost">Cancel</span>
+                <span class="button is-link" style="width: 48%; margin: 0.5%;" @click="onCreate()">Create</span>
+                <span class="button is-link" style="width: 48%; margin: 0.5%;" @click="toggleNewPost">Cancel</span>
             </div>
         </div>
     </div>

@@ -26,15 +26,14 @@
                             </div>
                             <div class="content">
                                 <p class="subtitle"><strong>My covid-19 experience: </strong></p>
-                                <p>Tripti, a 28-year old RJ from Lucknow got infected with Covid-19 around the end of March 2021. She surmised that the virus got infected from her father. She narrated the incident too. One fine day, her father wakes up with a fever, and post-check up it was found that he was tested positive.</p>
-                                <p>“We were shit scared, because he’s almost 60 years old and he has diabetes too. By the time his symptoms started showing, we were together, doing chores for him, I kinda knew that I was in close contact with my father. Although his symptoms were mild like fever, fatigue, he was home-isolated, but after 2-3 days I had fever, runny nose, and fatigue are some of the starting signs of my coronavirus” says Tripti on how she was infected with the virus and her initial symptoms.</p>
-                                <p>Five days into the fever, later, she wasn't able to drink water. She wasn't able to sit for 2-3 seconds. Being a chaiholic, she didn’t even feel like drinking chai (tea). Her close friend used to drop medicines, fruits and veggies. “I was drained out completely. My father recovered by that time, where he followed everything religiously like taking steam, ayurvedic medicines (giloy and ashwagandha tablets for immunity), but I was worsely affected and started dehydrated”, states RJ.</p>
-                                <p>During her first two weeks of covid-recovery, she had faced a lot of distress with her health. “My face became pale, I lost weight, my lips dried, my eyes popped out, and I got skinny within those 7-8 days”, added Tripti.</p>
-                                <p>We asked about the feeling when she was caught with the Covid-19, she said, “That was the lowest point of my life. I can still feel that feeling. I was so “weak”. No energy to even get up and sit. I could not even open my eyes. I was lying down.” She further added, “I remember it was 2 or 3 at night. I thought I was gone. I messaged my close friend about it. Now that I joke about it, laugh about it, but that was a low moment.”<p>
-                                Tripti’s recovery took 3-4 weeks. She shared how she recovered from the virus. “Sleep is very necessary. The more you sleep, the more you get better. There was a ray of hope I was hung on to. My family kept me sane and they supported me in every way.” Her friend used to get the electoral sachets and her brother helped her in completing drinking it. “Mann na bhi ho, finish it in 3-4 hours”, she quoted her brother. She got better by following the routine for 4-5 days.
-                                During her recovery, she consumed several fruits like pomegranate, watermelon, and all the foods that have water content. The worst part of her recovery was loss of smell and taste. “It took almost a month for me to get it back and start tasting. I was scared that I would forget how things used to taste. I still doubt that it’s not the taste that I used to taste, things used to taste, before I had COVID” asserts the Lucknow RJ. Slowly and gradually, the sense of smell got better, “but it doesn’t feel the same though” says Tripti.</p>
+                                <p>Rubin, 35 years old, hails from Ahmedabad. By profession, he’s an artist and creative director. His works involve paintings, murals and sculptor works. Rubin was infected with the virus on 23rd April 2021, during the second wave, a time when there was a spike in Covid cases. It was on 23rd April, at 3 am, Rubin woke up and he felt sleepless. After two hours, he felt even worse. His first symptoms were vomit, followed by fever.</p>
+                                <p>On the same day, he and his wife got tested. “We both decided to get tested as we are in close contact and in the same house so it is safer that way. She tested negative and I tested positive. We took the RT PCR done too”, says Rubin. When asked how he got infected with the virus, he said, “Two days before I got infected, my partner was already suspect, he also got infected by a virus, as we were working together. So, I presume, I got Covid from my worksite”.</p>
+                                <p>His wife, who’s a psychologist, helped him during his recovery process, both mentally and with household chores. About the recovery, Rubin consulted his close friend who is a doctor and showed the reports. “Before starting the covid medicine, and after getting the reports, my doctor suggested that we take a blood test. So that we can know that infection ratio. That was a very smart move. We took blood tests on the 2nd, 3rd and on the 4th day. I was home-treated, and constantly used to monitor the body temperature and oxygen levels. I was treated with antibiotics and supplements” Rubin added.</p>
+                                <p>On the 6th day, he lost his taste, which lasted for another 4 days. He recovered on the 12th day, and the very next day, he took the antigen test, like a rapid test at the govt facility, followed by an RT PCR. Finally, he was tested negative. “After 24 hrs, the report came and I was negative. On the 15th day, I had quit my isolation mode, but subsequently, I was in constant touch with the doctors. In the span of 15 days, we took 4 blood tests every 3 days.</p>
+                                <p>When asked what was the feeling during the recovery, he replied: “In the first few days, I refrained myself from social media and news, as it involves so much of similar stuff related to the virus. So that I can focus on my health. It hits your emotional and mental health as well. It does have emotional and mental breakdown. It does make you think about things which are missing. And if things go worse, it'll make you think about your family, etc. It has also hit me and one has to think about it. My wife being a psychologist, she helped me and motivated me in the process.”</p>
+                                <p>For the whole recovery, it cost him INR 20000. It took him 15 days to completely feel free from the virus. Apart from medicines, he said that he used to take steam for a healthy recovery. Hope is one thing that he was hung to while recovering. He also reminisced about his past tragic incident from 2013, where he was badly injured and was in bed for the whole year. So his friends reminded him that he had recovered from something worse before, so that uplifted him from the pain during the virus, and got him back to his feet, as he quoted his friends.</p>
                                 <p class="subtitle"><strong>What I suggest to current patients: </strong></p>
-                                <p>You can always rely on your family for support. For those people who are, whoever is there in a situation, their family members are affected or contacted with virus, please be there. Your support means everything, more than the medicines, more than the diet, more than the doctor’s treatment. That will make a difference.</p>
+                                <p> "Today" is the right time instead of waiting for the right time. Go with the flow. There are things that are beyond human reach. But you have to do what you have to do right now, which is in your hand and in your reach. Do things which are in your reach. Just focus on yourself while you are recovering. Please do not Google, only talk to medical professionals instead. Only take their suggestions.</p>
                             </div>
                     </div>
                     <div class="corousel">
@@ -56,7 +55,7 @@
             </div>
         </div>
         <footer class="footer">
-            <p>Have you also recovered from Covid-19 ? </p>
+            <p style="color: white; margin: 4px; font-weight: 400;">Have you also recovered from Covid-19 ?</p>
             <button v-if="!show" class="button is-link" @click="newTestimonial()">Write your experience!</button>
         </footer>
         <div class="modal" :class="[show ? 'is-active': '']">
@@ -87,7 +86,7 @@
                         </div>
                     </section>
                     <footer class="modal-card-foot">
-                    <button class="button is-success" @click="save()">Share</button>
+                        <button class="button is-success" @click="save()">Share</button>
                     </footer>
                 </div>
         </div>
@@ -128,6 +127,10 @@ export default {
     },
     methods: {
         newTestimonial: function () {
+            if (!this.uid || this.uid === '') {
+                window.location = '/';
+                return ;
+            }
             this.show = !this.show;
         },
         save: function () {
@@ -146,22 +149,6 @@ export default {
             })
         }
     },
-    created: function () {
-        axios.get('/api/v1/testimonials').then(resp => {
-            this.allTestimonials = resp.data.data;
-            (this.allTestimonials).forEach((tm)=> {
-                var id = tm.user.$oid || ''
-                if (id !== '' && !this.users[id]){
-                    axios.get('api/v1/user/' + id).then((r) => {
-                        if (r.data) {
-                            var u = r.data.data.data;
-                            this.users[id] = u;
-                        }
-                    })
-                }
-            })
-        })
-    }
 }
 </script>
 
@@ -203,6 +190,7 @@ export default {
 .footer {
     bottom: 0px;
     width: 100%;
+    background-color: transparent;
 }
 
 .corousel {

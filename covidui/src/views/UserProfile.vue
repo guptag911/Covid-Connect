@@ -3,7 +3,7 @@
 		<div class="main">
 			<router-link to="/dashboard">
 				<button
-					class="button is-inactive"
+					class="button is-link is-light"
 					style="width: 100%; margin-bottom: 2%;"
 				>
 					Back
@@ -244,7 +244,7 @@
 		color: white;
 	}
 	.is-active {
-		background: #273d51 !important;
+		background: #2160c4 !important;
 		font-weight: bold;
 		transform: scale(1.1);
 	}

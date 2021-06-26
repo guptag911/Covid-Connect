@@ -16,7 +16,7 @@
                 <a @click="save()"><i class="fas fa-check"></i></a>
                 <a @click="toggleEdit()"><i class="fas fa-times"></i></a>
             </div>
-            <a :href='editProfileUrl'><button class="button is-info" style="width: 100%; margin:3px">View Profile</button></a>
+            <a :href='editProfileUrl'><button class="button is-info" style="width: 100%; margin:3px; background-color: #2160c4">View Profile</button></a>
             <button class="button is-danger" style="width: 100%; margin:3px" @click="logout()">Logout!</button>
         </div>
     </div>
