@@ -2,7 +2,13 @@ import pymongo
 from pymongo import MongoClient
 from bson import ObjectId
 import json
-client = MongoClient('mongodb+srv://dbUser:Abhay.220@cluster0.nhmuu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+import os
+
+dbURL = os.environ.get('COVIDDB')
+if dbURL == None:
+    print("Database URL Not Found!");
+
+client = MongoClient(dbURL)
 
 db = client.get_database('hackcovid')
 testimonials = db.testimonials
