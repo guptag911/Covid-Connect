@@ -28,7 +28,6 @@ media
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -160,7 +159,6 @@ Thumbs.db
 
 .DS_Store
 node_modules
-/dist
 
 
 # local env files
