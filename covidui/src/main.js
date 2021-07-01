@@ -8,7 +8,7 @@ import axios from 'axios';
 Vue.config.productionTip = false
 export const bus = new Vue()
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000'
+axios.defaults.baseURL = 'https://covidconnectapi.herokuapp.com/'
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 

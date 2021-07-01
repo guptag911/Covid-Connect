@@ -4,30 +4,34 @@
           <button class="button is-link postFilterbtnF" @click="changeTab('all-tab')" :class="currTab == 'area-tab' ? 'is-light' : ''">Posts from all India</button>
           <button class="button is-link postFilterbtnS" @click="changeTab('area-tab')" :class="currTab == 'all-tab' ? 'is-light' : ''">Posts from your area</button>
       </div>
-      <loader-component v-if="isLoading" />
-      <div v-if="allPosts.length == 0">
+      <span v-if="isLoading">    
+        <loader-component v-if="isLoading" />
+      </span>
+      <span v-else>
+          <div v-if="allPosts.length == 0">
           <h2 class="title">No one needs help, that's great! &#128077;</h2>
       </div>
       <div v-for="post in allPosts" :key="post._id.$oid">
           <feed-card :post='post' :tags="helpTags" />
       </div>
       <hr>
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <a class="pagination-previous" title="This is the first page" :disabled = "isDisabled(pageNo-1)" @click="pageChange(pageNo-1)">Previous</a>
-        <a class="pagination-next" :disabled = "isDisabled(pageNo+1)" @click="pageChange(pageNo+1)">Next page</a>
-        <ul class="pagination-list">
-            <li>
-            <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">{{ pageNo }}</a>
-            </li>
-            <li>
-            <a class="pagination-link" aria-label="Goto page 'pageNo + 1'" :disabled="isDisabled(pageNo+1)"  @click="pageChange(pageNo+1)">{{ pageNo + 1 }}</a>
-            </li>
-            <li>
-            <a class="pagination-link" aria-label="Goto page 'pageNo + 2'" :disabled="isDisabled(pageNo+2)"  @click="pageChange(pageNo+2)"> {{ pageNo + 2 }}</a>
-            </li>
-            <li><span class="pagination-ellipsis">&hellip;</span></li>
-        </ul>
-    </nav>
+        <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+            <a class="pagination-previous" title="This is the first page" :disabled = "isDisabled(pageNo-1)" @click="pageChange(pageNo-1)">Previous</a>
+            <a class="pagination-next" :disabled = "isDisabled(pageNo+1)" @click="pageChange(pageNo+1)">Next page</a>
+            <ul class="pagination-list">
+                <li>
+                <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">{{ pageNo }}</a>
+                </li>
+                <li>
+                <a class="pagination-link" aria-label="Goto page 'pageNo + 1'" :disabled="isDisabled(pageNo+1)"  @click="pageChange(pageNo+1)">{{ pageNo + 1 }}</a>
+                </li>
+                <li>
+                <a class="pagination-link" aria-label="Goto page 'pageNo + 2'" :disabled="isDisabled(pageNo+2)"  @click="pageChange(pageNo+2)"> {{ pageNo + 2 }}</a>
+                </li>
+                <li><span class="pagination-ellipsis">&hellip;</span></li>
+            </ul>
+        </nav>
+      </span>
   </div>
 </template>
 
@@ -151,6 +155,10 @@ export default {
 .postFilterbtnS {
     width: 50%;
     border-radius: 0px 25px 25px 0px;
+}
+
+.title {
+    margin: 10px;
 }
 
 @media screen and (max-width: 950px) {

@@ -23,7 +23,8 @@
 						<edit-profile />
 					</div>
 					<div v-if="currTab == 'posts'">
-						<span v-for="(post, i) in allPosts" :key="i">
+						<span v-if="allPosts.length > 0">
+							<span  v-for="(post, i) in allPosts" :key="i">
 							<feed-card
 								:post="post"
 								:tags="helpTags"
@@ -83,6 +84,10 @@
 								</li>
 							</ul>
 						</nav>
+						</span>
+						<span v-else>
+							<h2>You haven't added any posts yet!</h2>
+						</span>
 					</div>
 				</div>
 			</div>
