@@ -1,9 +1,4 @@
----
-
-
----
-
-<h1 id="covid-connect">Covid Connect</h1>
+<a href="www.covidconnect.co.in"><h1 id="covid-connect">Covid Connect</h1></a>
 <p>A platform that connects help seekers with help providers around the world.</p>
 <h2 id="why-covid-connect">Why Covid Connect?</h2>
 <ul>
@@ -48,4 +43,5 @@ python <a href="http://manage.py">manage.py</a> migrate</li>
 <li><code>python manage.py runserver</code></li>
 <li>You are all set up.</li>
 </ul>
+
 
